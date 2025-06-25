@@ -3,13 +3,10 @@ __pycache__/
 *.py[cod]
 *.sqlite3
 *.log
-
-# Env
+.idea
 .env
 *.env
 venv/
 env/
-
-# IDE
 .idea/
 .vscode/
