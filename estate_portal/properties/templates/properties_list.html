@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    CATALOG
+{% endblock %}
+
+{% block content %}
+<ul class="list-group">
+    {% for prop in properties_list %}
+        <li class="list-group-item">
+            <a href="{% url 'properties:detail' prop.id %}">
+                {{ prop.title }} - {{ prop.price }}
+            </a>
+        </li>
+    {% empty %}
+        <li class="list-group-item">Nothing found</li>
+    {% endfor %}
+</ul>
+{% endblock %}
