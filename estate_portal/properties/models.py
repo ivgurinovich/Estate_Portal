@@ -3,7 +3,6 @@ from users.models import User
 
 
 class Property(models.Model):
-
     TYPE_CHOICES = [('rent', 'rent'), ('sale', 'sale')]
 
     title = models.CharField(max_length=255)

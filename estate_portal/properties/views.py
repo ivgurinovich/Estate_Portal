@@ -1,13 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 
-
 from properties.models import Property
 
 
 def property_list(request):
     properties_list = Property.objects.filter(available=True)
     return render(request, template_name='properties_list.html',
-                            context={'properties_list': properties_list})
+                  context={'properties_list': properties_list})
 
 
 def property_detail(request, prop_id):

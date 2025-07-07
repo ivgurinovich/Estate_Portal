@@ -1,7 +1,6 @@
 from django.urls import path
 from properties.views import property_list, property_detail
 
-
 app_name = 'properties'
 
 urlpatterns = [
