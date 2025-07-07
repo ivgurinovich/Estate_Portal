@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.http import HttpResponse, HttpRequest
 from users.forms import SignUpForm
 
+
 def signup_view(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         form = SignUpForm(request.POST)

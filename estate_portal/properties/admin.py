@@ -1,7 +1,4 @@
 from django.contrib import admin
-from  properties.models import Property
-
-
+from properties.models import Property
 
 admin.site.register(Property)
-
