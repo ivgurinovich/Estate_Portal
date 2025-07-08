@@ -10,7 +10,8 @@ def signup_view(request: HttpRequest) -> HttpResponse:
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('properties:properties:list')
+            return redirect('properties:property_list')
+
     else:
         form = SignUpForm()
     return render(request,
