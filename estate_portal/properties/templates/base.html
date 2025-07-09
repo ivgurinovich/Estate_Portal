@@ -17,6 +17,9 @@
         {% csrf_token %}
         <button class="btn btn-outline-secondary">Log out</button>
     </form>
+    {% if user.is_owner%}
+    <a href="{% url 'properties:owner_request_list' %}" class="btn btn-outline-info">My Requests</a>
+    {% endif %}
 
     {%else%}
     <a href="{% url 'users:login'%}" class="btn btn-outline-secondary">Log In</a>

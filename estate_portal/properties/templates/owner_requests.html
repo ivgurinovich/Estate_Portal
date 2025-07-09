@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}My requests{% endblock %}
+{% block content %}
+  <h1>My properties requests</h1>
+
+  {% if deal_requests %}
+  <ul class="list-group">
+      {% for req in deal_requests %}
+          <li class="list-group-item">
+              <strong>{{ req.property.title }}</strong> from {{ req.seeker.username }}
+              {{ req.message|linebreaks }}
+              <small class="text-muted d-block">
+                sent {{ req.created_at|date:"Y-m-d H:i" }}
+              </small>
+          </li>
+      {% endfor %}
+  </ul>
+  {% else %}
+  <p>No requests yet</p>
+  {% endif %}
+{% endblock %}

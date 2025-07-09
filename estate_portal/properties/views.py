@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from properties.models import Property
+from properties.models import Property, DealRequest
 from django.contrib.auth.decorators import login_required
 from properties.forms import DealRequestForm
 
@@ -26,8 +26,18 @@ def create_deal_request(request, prop_id):
             deal_request.property = property_obj
             deal_request.save()
             return redirect('properties:detail', prop_id=prop_id)
-        else:
-            form = DealRequestForm()
+    else:
+        form = DealRequestForm()
 
-        return render(request, 'deal_request_form.html',
-                      context={'form': form, 'property': property_obj})
+    return render(request, 'deal_request_form.html', {
+        'form': form,
+        'property': property_obj
+    })
+
+
+@login_required
+def owner_request_list(request):
+    deal_requests = DealRequest.objects.select_related('property', 'seeker').filter(
+        property__owner=request.user).order_by("-created_at")
+    return render(request, template_name='owner_requests.html',
+                  context={'deal_requests': deal_requests})

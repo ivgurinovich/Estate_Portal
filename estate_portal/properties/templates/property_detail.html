@@ -1,21 +1,22 @@
 {% extends 'base.html' %}
-{% block title %} {{property.title}} {% endblock %}
 
 {% block content %}
 
-<h1> {{property.title}} </h1>
 {% if property.image %}
 <img src="{{ property.image.url }}" alt="400" class="mb-3">
+{% endif %}
+
 <ul>
-    <li><strong>Price</strong> {{property.price}}</li>
-    <li><strong>Type</strong> {{property.type}}</li>
-    <li><strong>Bedrooms</strong> {{property.bedrooms}}</li>
-    <li><strong>Bathrooms</strong> {{property.bathrooms}}</li>
-    <li><strong>Area</strong> {{property.area}}</li>
-    <li><strong>Address</strong> {{property.address}}</li>
+    <li><strong>Price</strong> {{ property.price }}</li>
+    <li><strong>Type</strong> {{ property.type }}</li>
+    <li><strong>Bedrooms</strong> {{ property.bedrooms }}</li>
+    <li><strong>Bathrooms</strong> {{ property.bathrooms }}</li>
+    <li><strong>Area</strong> {{ property.area }}</li>
+    <li><strong>Address</strong> {{ property.address }}</li>
 </ul>
 
 {% if user.is_authenticated and user.is_seeker %}
-
+<a class="btn btn-success" href="{% url 'properties:deal_request' property.pk %}">Request</a>
 {% endif %}
+
 {% endblock %}

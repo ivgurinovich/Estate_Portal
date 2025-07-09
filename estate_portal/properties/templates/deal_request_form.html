@@ -1,11 +1,10 @@
 {%extends 'base.html' %}
-
 {%block content%}
-  <h1>Deal Request for "{{property.title}}"</h1>
-  <form method='post'>
+<h1>Deal Request for "{{property.title}}"</h1>
+<form method='post'>
     {%csrf_token%}
     {{form.as_p}}
     <button class="btn btn-success">Create Request</button>
-  </form>
+</form>
 
-{%end_block%}
+{% endblock %}
