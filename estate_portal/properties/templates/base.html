@@ -19,6 +19,10 @@
     </form>
     {% if user.is_owner%}
     <a href="{% url 'properties:owner_request_list' %}" class="btn btn-outline-info">My Requests</a>
+    <a href="{% url 'properties:create_property' %}" class="btn btn-outline-info">Add new property</a>
+    {% endif %}
+    {% if user.is_seeker %}
+     <a href="{% url 'properties:seeker_request_list' %}" class="btn btn-outline-info">My Applications</a>
     {% endif %}
 
     {%else%}

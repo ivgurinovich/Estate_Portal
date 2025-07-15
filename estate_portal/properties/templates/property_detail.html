@@ -15,6 +15,9 @@
     <li><strong>Address</strong> {{ property.address }}</li>
 </ul>
 
+{% if user == property.owner %}
+    <a class="btn btn-warning" href="{% url 'properties:edit_property' property.pk %}">Edit</a>
+{% endif %}
 {% if user.is_authenticated and user.is_seeker %}
 <a class="btn btn-success" href="{% url 'properties:deal_request' property.pk %}">Request</a>
 {% endif %}

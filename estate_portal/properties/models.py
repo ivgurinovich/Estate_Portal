@@ -27,16 +27,19 @@ class Property(models.Model):
 
 class DealRequest(models.Model):
     STATUSES = (
-        ('pending', 'pending'),
-        ('approved', 'approved'),
-        ('rejected', 'rejected'),
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
     )
+
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     seeker = models.ForeignKey(User, on_delete=models.CASCADE)
-
     created_at = models.DateTimeField(auto_now_add=True)
     message = models.TextField(null=True, blank=True)
-    status = models.CharField(max_length=20, choices=STATUSES)
+    status = models.CharField(max_length=20, choices=STATUSES, default='pending')
+
+
 
     def __str__(self):
         return f"Deal Request for {self.id} for {self.property.title}"
+

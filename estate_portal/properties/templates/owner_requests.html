@@ -1,21 +1,38 @@
 {% extends 'base.html' %}
-{% block title %}My requests{% endblock %}
+{% block title %}My Property Requests{% endblock %}
 {% block content %}
-  <h1>My properties requests</h1>
+  <h1>My Property Requests</h1>
 
   {% if deal_requests %}
-  <ul class="list-group">
+    <ul class="list-group">
       {% for req in deal_requests %}
-          <li class="list-group-item">
-              <strong>{{ req.property.title }}</strong> from {{ req.seeker.username }}
-              {{ req.message|linebreaks }}
-              <small class="text-muted d-block">
-                sent {{ req.created_at|date:"Y-m-d H:i" }}
-              </small>
-          </li>
+        <li class="list-group-item">
+          <strong>{{ req.property.title }}</strong> from {{ req.seeker.username }}<br>
+          {{ req.message|linebreaks }}
+          <br>
+          <small class="text-muted d-block">Sent {{ req.created_at|date:"Y-m-d H:i" }}</small>
+          <strong>Status:</strong>
+          {% if req.status == 'pending' %}
+            <span class="badge bg-warning text-dark">Pending</span><br>
+
+            <form action="{% url 'properties:change_request_status' req.id 'approved' %}" method="post" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-success mt-2">Approve</button>
+            </form>
+
+            <form action="{% url 'properties:change_request_status' req.id 'rejected' %}" method="post" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-danger mt-2">Reject</button>
+            </form>
+          {% elif req.status == 'approved' %}
+            <span class="badge bg-success">Approved</span>
+          {% elif req.status == 'rejected' %}
+            <span class="badge bg-danger">Rejected</span>
+          {% endif %}
+        </li>
       {% endfor %}
-  </ul>
+    </ul>
   {% else %}
-  <p>No requests yet</p>
+    <p>No requests yet</p>
   {% endif %}
 {% endblock %}
